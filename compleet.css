@@ -4,6 +4,8 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.44);
     margin-top: 0;
     position: absolute;
+    background: #EEEEEE;
+    color: #212121;
 }
 
 .compleet-list.hidden {
