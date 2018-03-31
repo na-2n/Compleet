@@ -1,0 +1,26 @@
+.compleet-list {
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.44);
+    margin-top: 0;
+    position: absolute;
+}
+
+.compleet-list.hidden {
+    display: none;
+}
+
+.compleet-list li {
+    list-style-type: none;
+    font-family: 'Noto Sans', sans-serif;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.compleet-list li:hover {
+    background: rgba(0,0,0,0.15) !important;
+}
+
+.compleet-list li.selected {
+    background: rgba(0,0,0,0.1);
+}
