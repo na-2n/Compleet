@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Compleet Demo</title>
+        <style>
+        input {
+            margin-top: 100px;
+            margin-left: 100px;
+            border: none;
+            border-radius: 0;
+            background-color: #EEEEEE;
+            color: #141414;
+            border-bottom: 2px solid #212121;
+            padding: 10px;
+            background: url(https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_search_black_24px.svg) no-repeat right;
+        }
+        </style>
+        <link href="./compleet.css" rel="stylesheet">
+        <script src="./compleet.js"></script>
+    </head>
+    <body>
+        <input type="search" id="search-bar">
+        <script>
+            var search = document.querySelector("#search-bar");
+
+            search.compleet({
+                maxResults: 4,
+                source: function(term, resp) {
+                    var v = term.split(/\s+/).pop().trim();
+                    var tags = ["a", "ab", "abc", "abcd", "abcde", "abcdef"];
+
+                    resp(tags.filter(function (t) { return t.startsWith(v); }), v);
+                }
+            });
+        </script>
+    </body>
+</html>
