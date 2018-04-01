@@ -9,9 +9,11 @@ Because there weren't any other libraries that did what I needed.
 ### Usage
 
 ```js
-var input = document.querySelector("#myinput");
+const input = document.querySelector("input#myinput");
 
 input.compleet({
+// OR
+compleet(input, {
     maxResults: 10, // max results, default is 5
     source: function(term, resp) {
         var val = term.split(/\s+/).pop(); // split the value by spaces
