@@ -5,7 +5,7 @@ package moe.yui.compleet
 import org.w3c.dom.HTMLInputElement
 
 external interface ICompleetOptions {
-    val maxResults: Number
+    val maxResults: Int
     val source: (term: String, resp: (terms: Array<String>, value: String) -> Unit) -> Unit
 }
 

@@ -26,12 +26,22 @@
 
             search.compleet({
                 maxResults: 4,
-                source: function(term, resp) {
+                tags: function(cb) {
+                    cb([
+                        "a",
+                        "ab",
+                        "abc",
+                        "abcd",
+                        "abcde",
+                        "abcdef"
+                    ]);
+                }
+                /*source: function(term, resp) {
                     var v = term.split(/\s+/).pop().trim();
                     var tags = ["a", "ab", "abc", "abcd", "abcde", "abcdef"];
 
                     resp(tags.filter(function (t) { return t.startsWith(v); }), v);
-                }
+                }*/
             });
         </script>
     </body>

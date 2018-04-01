@@ -3,6 +3,20 @@
 HTMLInputElement.prototype.compleet = function(opts) { compleet(this, opts); };
 
 function compleet(input, opts) {
+    opts.source = opts.source || opts.tags ? function(s, cb) {
+        opts.tags(function(ts) {
+            let term = s.split(" ").pop();
+
+            if (term && term.trim()) {
+                term = term.trim().toLowerCase();
+
+                cb(ts.filter(function(t) { return t.toLowerCase().startsWith(term); }), term);
+            } else {
+                cb([], "");
+            }
+        });
+    } : null;
+
     const ul = document.createElement("ul");
     let curList = [];
     let curVal = "";
@@ -46,7 +60,7 @@ function compleet(input, opts) {
 
                     input.value = input.value.replace(regex, curList[index]).trim();
                 }
-                return;
+                break;
             }
         }
     };
@@ -60,6 +74,7 @@ function compleet(input, opts) {
 
         if (!val) {
             ul.classList.add("hidden");
+            return;
         } else {
             ul.classList.remove("hidden");
         }
@@ -69,6 +84,12 @@ function compleet(input, opts) {
 
             if (index >= t.length) {
                 index = t.length - 1;
+            }
+
+            if (!v.trim()) {
+                ul.classList.add("hidden");
+                curList = [];
+                return;
             }
 
             curList = t;
@@ -83,7 +104,7 @@ function compleet(input, opts) {
                 const term = t[i];
 
                 if (!term.trim()) {
-                    !ul.classList.add("hidden");
+                    ul.classList.add("hidden");
                     return;
                 }
 
