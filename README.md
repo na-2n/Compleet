@@ -16,11 +16,15 @@ input.compleet({
 compleet(input, {
     maxResults: 10, // max results, default is 5
     source: function(term, resp) {
-        var val = term.split(/\s+/).pop(); // split the value by spaces
-        var terms = getTermsFromSomewhere(); // get the terms from somewhere
-        var matched = terms.filter(function(t) { return t.startsWith(val); }); // filter the terms
+        const val = term.split(" ").pop(); // split the value by spaces
+        const terms = getTermsFromSomewhere(); // get the terms from somewhere
+        const matched = terms.filter(function(t) { return t.startsWith(val); }); // filter the terms
 
         resp(matched, val); // send the response
+    },
+    // OR
+    tags: function(resp) {
+        getTermsFromSomewhere(function(terms) { resp(terms); });
     }
 });
 ```
