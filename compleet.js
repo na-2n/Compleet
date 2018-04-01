@@ -9,7 +9,7 @@ HTMLInputElement.prototype.compleet = function(opts) {
 
     ul.style.width = this.clientWidth + "px";
 
-    const bounds = this.getBoundingClientRect()
+    const bounds = this.getBoundingClientRect();
 
     ul.style.top = bounds.top + bounds.height + "px";
     ul.style.left = bounds.left - 10 + "px";
@@ -48,14 +48,12 @@ HTMLInputElement.prototype.compleet = function(opts) {
                 return;
             }
         }
-    }
+    };
 
-    this.onkeyup = function(e) {
+    this.onkeyup = function() {
         ul.innerHTML = "";
         curList = [];
         curVal = "";
-
-        console.log(e.keyCode);
 
         const val = this.value;
 
@@ -98,13 +96,13 @@ HTMLInputElement.prototype.compleet = function(opts) {
 
                 li.onclick = function() {
                     ul.classList.add("hidden");
-                    const regex = new RegExp(v + "$")
+                    const regex = new RegExp(v + "$");
 
                     that.value = val.replace(regex, term).trim();
-                }
+                };
 
                 ul.appendChild(li);
             }
         });
-    }
+    };
 };
