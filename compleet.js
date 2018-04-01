@@ -4,9 +4,9 @@ HTMLInputElement.prototype.compleet = function(opts) { compleet(this, opts); };
 
 function compleet(input, opts) {
     const ul = document.createElement("ul");
-    var curList = [];
-    var curVal = "";
-    var index = 0;
+    let curList = [];
+    let curVal = "";
+    let index = 0;
 
     ul.style.width = input.clientWidth + "px";
 
