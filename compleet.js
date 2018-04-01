@@ -1,24 +1,25 @@
 // vim:ts=8 smarttab sw=4 expandtab sts=0
 
-HTMLInputElement.prototype.compleet = function(opts) {
-    const that = this;
+HTMLInputElement.prototype.compleet = function(opts) { compleet(this, opts); };
+
+function compleet(input, opts) {
     const ul = document.createElement("ul");
     var curList = [];
     var curVal = "";
     var index = 0;
 
-    ul.style.width = this.clientWidth + "px";
+    ul.style.width = input.clientWidth + "px";
 
-    const bounds = this.getBoundingClientRect();
+    const bounds = input.getBoundingClientRect();
 
     ul.style.top = bounds.top + bounds.height + "px";
     ul.style.left = bounds.left - 10 + "px";
     ul.classList.add("compleet-list");
     ul.classList.add("hidden");
 
-    this.parentElement.appendChild(ul);
+    input.parentElement.appendChild(ul);
 
-    this.onkeydown = function(e) {
+    input.onkeydown = function(e) {
         switch (e.keyCode) {
             case 40: {
                 if (index + 1 !== curList.length) {
@@ -43,19 +44,19 @@ HTMLInputElement.prototype.compleet = function(opts) {
                     ul.classList.add("hidden");
                     const regex = new RegExp(curVal + "$");
 
-                    that.value = this.value.replace(regex, curList[index]).trim();
+                    input.value = input.value.replace(regex, curList[index]).trim();
                 }
                 return;
             }
         }
     };
 
-    this.onkeyup = function() {
+    input.onkeyup = function() {
         ul.innerHTML = "";
         curList = [];
         curVal = "";
 
-        const val = this.value;
+        const val = input.value;
 
         if (!val) {
             ul.classList.add("hidden");
@@ -98,11 +99,11 @@ HTMLInputElement.prototype.compleet = function(opts) {
                     ul.classList.add("hidden");
                     const regex = new RegExp(v + "$");
 
-                    that.value = val.replace(regex, term).trim();
+                    input.value = val.replace(regex, term).trim();
                 };
 
                 ul.appendChild(li);
             }
         });
     };
-};
+}
