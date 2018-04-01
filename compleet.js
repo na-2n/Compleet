@@ -3,8 +3,9 @@
 HTMLInputElement.prototype.compleet = function(opts) {
     const that = this;
     const ul = document.createElement("ul");
-    var index = 0;
     var curList = [];
+    var curVal = "";
+    var index = 0;
 
     ul.style.width = this.clientWidth + "px";
 
@@ -16,9 +17,45 @@ HTMLInputElement.prototype.compleet = function(opts) {
     ul.classList.add("hidden");
 
     this.parentElement.appendChild(ul);
-    
+
+    this.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 40: {
+                if (index + 1 !== curList.length) {
+                    e.preventDefault();
+                    index++;
+                }
+                break;
+            }
+
+            case 38: {
+                if (index - 1 > -1) {
+                    e.preventDefault();
+                    index --;
+                }
+                break;
+            }
+
+            case 13:
+            case 9: {
+                if (curList[index]) {
+                    e.preventDefault();
+                    ul.classList.add("hidden");
+                    const regex = new RegExp(curVal + "$");
+
+                    that.value = this.value.replace(regex, curList[index]).trim();
+                }
+                return;
+            }
+        }
+    }
+
     this.onkeyup = function(e) {
         ul.innerHTML = "";
+        curList = [];
+        curVal = "";
+
+        console.log(e.keyCode);
 
         const val = this.value;
 
@@ -31,29 +68,12 @@ HTMLInputElement.prototype.compleet = function(opts) {
         opts.source(val, function(t, v) {
             t = t.slice(0, opts.maxResults || 5);
 
-            if (index >= t.length) index = t.length - 1;
-
-            switch (e.key) {
-                case "ArrowDown": {
-                    if (index + 1 !== t.length) index++;
-                    break;
-                }
-
-                case "ArrowUp": {
-                    if (index - 1 > -1) index--;
-                    break;
-                }
-
-                case "Enter": {
-                    if (t[index]) {
-                        ul.classList.add("hidden");
-                        const regex = new RegExp(v + "$");
-
-                        that.value = val.replace(regex, t[index]).trim();
-                    }
-                    return;
-                }
+            if (index >= t.length) {
+                index = t.length - 1;
             }
+
+            curList = t;
+            curVal = v;
 
             if (!t || !t.length) {
                 ul.classList.add("hidden");
