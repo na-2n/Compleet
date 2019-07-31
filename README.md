@@ -16,7 +16,8 @@ input.compleet({
 compleet(input, {
     // General options
     maxResults: 10, // max results, default is 5
-    raw: false, // whether to use innerHTML or innerText to set autocomplete options, default is false (innerText). DO NOT SET THIS TO TRUE IF YOU DO NOT FILTER THESE, YOU HAVE BEEN WARNED
+    raw: false, // whether to use innerHTML or innerText to set autocomplete options, default is false (innerText)
+    //   ^^^^^ DO NOT SET THIS TO TRUE IF YOU PROVIDE UNFILTERED USER TAGS, YOU HAVE BEEN WARNED
 
     // Tag source options
     source: function(term, resp) {
