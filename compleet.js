@@ -46,7 +46,7 @@ function compleet(input, opts) {
             case 38: {
                 if (index - 1 > -1) {
                     e.preventDefault();
-                    index --;
+                    index--;
                 }
                 break;
             }
@@ -66,7 +66,12 @@ function compleet(input, opts) {
     };
 
     input.onkeyup = function() {
-        ul.innerHTML = "";
+        let child;
+
+        while ((child = ul.firstChild)) {
+            ul.removeChild(child);
+        }
+
         curList = [];
         curVal = "";
 
@@ -75,9 +80,9 @@ function compleet(input, opts) {
         if (!val) {
             ul.classList.add("hidden");
             return;
-        } else {
-            ul.classList.remove("hidden");
         }
+        
+        ul.classList.remove("hidden");
 
         opts.source(val, function(t, v) {
             t = t.slice(0, opts.maxResults || 5);
@@ -114,7 +119,7 @@ function compleet(input, opts) {
                     li.classList.add("selected");
                 }
 
-                li.innerHTML = term;
+                li[opts.raw ? "HTML" : "innerText"] = term; 
 
                 li.onclick = function() {
                     ul.classList.add("hidden");
