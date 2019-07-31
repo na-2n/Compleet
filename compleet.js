@@ -100,7 +100,7 @@ function compleet(input, opts) {
             curList = t;
             curVal = v;
 
-            if (!t || !t.length) {
+            if (!t || (t.length === 1 && t[0] === v)) {
                 ul.classList.add("hidden");
                 return;
             }
