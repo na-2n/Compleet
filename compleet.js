@@ -119,7 +119,7 @@ function compleet(input, opts) {
                     li.classList.add("selected");
                 }
 
-                li[opts.raw ? "HTML" : "innerText"] = term; 
+                li[opts.raw ? "innerHTML" : "innerText"] = term; 
 
                 li.onclick = function() {
                     ul.classList.add("hidden");
